@@ -32,9 +32,14 @@ void pp_callback(const pcl::visualization::PointPickingEvent& event, void *args)
     std::cout << current_point.x << "," << current_point.y << "," << current_point.z << std::endl;
 
 }
-int main()
+int main(int argc,char* argv[])
 {
-    std::string filename("/Users/gao/PycharmProjects/callibrate_camera/pointCloud/12.pcd");
+    if (argc <= 1){
+        std::cout<< "需传入点云文件路径" << std::endl;
+        return 1;
+    }
+    char* fn = argv[1];
+    std::string filename(fn);
     //visualizer
     pcl::PointCloud<pcl::PointXYZL>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZL>());
     pcl::visualization::PCLVisualizer::Ptr viewer(new pcl::visualization::PCLVisualizer("viewer"));
